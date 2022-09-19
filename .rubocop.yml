@@ -1,0 +1,33 @@
+require:
+ - rubocop-rspec
+ - rubocop-rake
+
+RSpec/NestedGroups:
+  Max: 6
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 6
+
+AllCops:
+  TargetRubyVersion: 2.4
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 120
+
+Style/MixinUsage:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/datadog/service_catalog/v2/schema_spec.rb'
+    - 'spec/datadog/service_catalog/v2/service_definition_spec.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/datadog/service_catalog/v2/validator_spec.rb'
+
+Metrics/ModuleLength:
+   Exclude:
+    - 'spec/datadog/service_catalog/v2/service_definition_spec.rb'
