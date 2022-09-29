@@ -1,13 +1,53 @@
 version: 2.1
+
+# Note: This circleCi configuration is setup for gem development
+# gem development specific configuration notes are below
+# Give careful consideration to noted sections for a regular
+# service or ruby project
+#
+references:
+  test_suite: &test_suite
+    run:
+      name: Run test suite
+      command: bundle exec rake spec
+
+  lint: &lint
+    run:
+      name: Code Checks
+      command: bundle exec rubocop --parallel
+
+  bundle: &bundle
+    run:
+      name: bundle install dependencies
+      command: bundle install
+
 jobs:
-  build:
+  lint:
     docker:
-      - image: ruby:2.7.2
+      - image: 'cimg/ruby:2.7'
     steps:
       - checkout
-      - run:
-          name: Run the default task
-          command: |
-            gem install bundler -v 2.2.11
-            bundle install
-            bundle exec rake
+      - <<: *bundle
+      - <<: *lint
+
+  test:
+    parameters:
+      ruby-version:
+        type: string
+    docker:
+      - image: 'cimg/ruby:<< parameters.ruby-version >>'
+    steps:
+      - checkout
+      - <<: *bundle
+      - <<: *test_suite
+
+workflows:
+  build_and_test:
+    jobs:
+      - lint
+      - test:
+          requires:
+            - lint
+          matrix:
+            parameters:
+              ruby-version: ['2.7', '3.0', '3.1']

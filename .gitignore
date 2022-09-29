@@ -1,3 +1,7 @@
+# gem
+Gemfile.lock
+
+# Mac
 .DS_Store
 .AppleDouble
 .LSOverride

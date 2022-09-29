@@ -11,6 +11,7 @@ RSpec/MultipleMemoizedHelpers:
 AllCops:
   TargetRubyVersion: 2.4
   NewCops: enable
+  SuggestExtensions: false
 
 Layout/LineLength:
   Max: 120
