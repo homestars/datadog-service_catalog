@@ -12,6 +12,8 @@ gem 'rails'
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.9'
 gem 'rspec-json_expectations'
+gem 'rspec-sonarqube-formatter', '~> 1.5', require: false
 gem 'rubocop', '~> 1.7'
 gem 'rubocop-rake'
 gem 'rubocop-rspec'
+gem 'simplecov', require: false, group: :test

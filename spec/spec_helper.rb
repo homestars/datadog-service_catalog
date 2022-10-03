@@ -6,7 +6,13 @@ require 'support/hash_utils'
 
 require 'rspec/json_expectations'
 
+require 'simplecov'
+require 'simplecov_json_formatter'
+
 include Support::FileUtils
+
+SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+SimpleCov.start
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
