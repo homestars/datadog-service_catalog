@@ -1,11 +1,13 @@
 version: 2.1
 
-# Note: This circleCi configuration is setup for gem development
-# gem development specific configuration notes are below
-# Give careful consideration to noted sections for a regular
-# service or ruby project
-#
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.1.1
+
 references:
+  default_image: &default_image
+    docker:
+        - image: 'cimg/ruby:2.7'
+
   test_suite: &test_suite
     run:
       name: Run test suite
@@ -21,10 +23,20 @@ references:
       name: bundle install dependencies
       command: bundle install
 
+  persist_reports: &persist_reports
+    persist_to_workspace:
+      root: .
+      paths:
+        - coverage/coverage.json
+        - coverage/sonarcube-report.xml
+
+  mount_reports: &mount_reports
+    attach_workspace:
+      at: .
+
 jobs:
   lint:
-    docker:
-      - image: 'cimg/ruby:2.7'
+    <<: *default_image
     steps:
       - checkout
       - <<: *bundle
@@ -39,7 +51,23 @@ jobs:
     steps:
       - checkout
       - <<: *bundle
+      - <<: *mount_reports
       - <<: *test_suite
+      - when:
+          condition:
+            and:
+              - equal: [ '2.7', << parameters.ruby-version >> ]
+          steps:
+            - <<: *persist_reports
+            - store_artifacts:
+                path: coverage
+
+  report:
+    <<: *default_image
+    steps:
+      - checkout
+      - <<: *mount_reports
+      - sonarcloud/scan
 
 workflows:
   build_and_test:
@@ -51,3 +79,8 @@ workflows:
           matrix:
             parameters:
               ruby-version: ['2.7', '3.0', '3.1']
+      - report:
+          context: SonarCloud
+          requires:
+            - lint
+            - test

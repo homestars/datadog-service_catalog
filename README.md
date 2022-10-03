@@ -1,5 +1,7 @@
 # Datadog::ServiceCatalog
 
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=homestars_datadog-service_catalog&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=homestars_datadog-service_catalog) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=homestars_datadog-service_catalog&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=homestars_datadog-service_catalog) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=homestars_datadog-service_catalog&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=homestars_datadog-service_catalog)
+
 Use Markdown front matter to update [DataDog's ServiceCatalog](https://docs.datadoghq.com/tracing/service_catalog/)
 
 ### Installation

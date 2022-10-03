@@ -1,6 +1,9 @@
 # gem
 Gemfile.lock
 
+# SonarQube
+.scannerwork
+
 # Mac
 .DS_Store
 .AppleDouble
