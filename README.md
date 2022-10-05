@@ -72,4 +72,4 @@ This provides two new rake tasks: 1) `service_catalog:validate`; 2) `service_cat
 
 ### Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/homstars/datadog-service_catalog.
+Bug reports and pull requests are welcome on GitHub at https://github.com/homestars/datadog-service_catalog.
