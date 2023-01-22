@@ -21,17 +21,29 @@ You need:
 1. [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys)
 2. and a [Datadog Application Key](https://app.datadoghq.com/organization-settings/application-keys)
 
-####  Configuration
+#### Add Rake Tasks
 
-If using in a Rails project, setup an initializer to configure the gem:
+Add the following to your Rakefile:
 
 ```ruby
-Datadog::ServiceCatalog.configure do |config|
-  config.datadog_api_key = '...'
-  config.datadog_application_key = '...'
-  config.markdown_file = 'service_catalog.md'
+require 'datadog/service_catalog/rake_tasks'
+
+namespace :service_catalog do
+  Datadog::ServiceCatalog.configure do |config|
+    config.datadog_api_key = '..'
+    config.datadog_application_key = '..'
+    config.markdown_file = 'service_info.md'
+  end
+  
+  Datadog::ServiceCatalog::RakeTasks::Validate.new
+	Datadog::ServiceCatalog::RakeTasks::UploadAll.new(['service_catalog:validate'])
 end
 ```
+
+This provides two new rake tasks: 
+
+1) `service_catalog:validate` - validate your service definition
+2) `service_catalog:upload_all` - upload service definitions for all `datadog_service_identifiers` 
 
 #### Front Matter Setup
 
@@ -50,20 +62,7 @@ tags:
 ---
 ```
 
-
-
-#### Rake
-
-Add the following to your Rakefile:
-
-```ruby
-require 'datadog/service_catalog/rake_tasks'
-
-Datadog::ServiceCatalog::RakeTasks::Validate.new
-Datadog::ServiceCatalog::RakeTasks::UploadAll.new('service_catalog', ['service_catalog:validate', :environment])
-```
-
-This provides two new rake tasks: 1) `service_catalog:validate`; 2) `service_catalog:upload_all`
+As you build your service definition, use `rake service_catalog:validate` to ensure it is valid. Once your definition is complete use `rake service_catalog:upload_all` to create or update your service catalog entries to DataDog.
 
 ### References
 

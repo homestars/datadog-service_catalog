@@ -9,13 +9,11 @@ module Datadog
       #
       class Validate < RakeTask
         def define_task
-          namespace(nspace) do
-            desc 'Upload the ServiceDefinition for each service identifier'
-            task(validate: task_dependencies) do
-              unless service_definition.valid?
-                puts formatted_error_msg
-                abort('The ServiceDefinition was not valid')
-              end
+          desc 'Validate the ServiceDefinition'
+          task(validate: task_dependencies) do
+            unless service_definition.valid?
+              puts formatted_error_msg
+              abort('The ServiceDefinition was not valid')
             end
           end
         end

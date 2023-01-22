@@ -9,11 +9,9 @@ module Datadog
       #
       class UploadAll < RakeTask
         def define_task
-          namespace(nspace) do
-            desc 'Upload the ServiceDefinition for each service identifier'
-            task(upload_all: task_dependencies) do
-              service_definition_klass.new.upload_all
-            end
+          desc 'Upload the ServiceDefinition for each service identifier'
+          task(upload_all: task_dependencies) do
+            service_definition_klass.new.upload_all
           end
         end
       end

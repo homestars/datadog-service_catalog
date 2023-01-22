@@ -9,15 +9,10 @@ module Datadog
       # RakeTasks::RakeTask - base rake task for Service Catalog tasks
       #
       class RakeTask < ::Rake::TaskLib
-        attr_accessor :nspace, :task_dependencies, :verbose
+        attr_accessor :task_dependencies, :verbose
 
-        def initialize(
-          namespace = :service_catalog,
-          task_dependencies = [],
-          service_definition_klass = V2::ServiceDefinition
-        )
+        def initialize(task_dependencies = [], service_definition_klass = V2::ServiceDefinition)
           super()
-          @nspace = namespace
           @service_definition_klass = service_definition_klass
           @task_dependencies = task_dependencies
           @verbose = true

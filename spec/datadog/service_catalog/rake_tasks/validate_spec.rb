@@ -20,14 +20,14 @@ module Datadog
 
         describe 'defining tasks' do
           it 'creates an validate task' do
-            expect(Rake::Task.task_defined?('service_catalog:validate')).to be true
+            expect(Rake::Task.task_defined?('validate')).to be true
           end
         end
 
         describe 'running upload_all' do
           before do
-            described_class.new(:service_catalog, [], service_definition_klass)
-            Rake::Task['service_catalog:validate'].execute
+            described_class.new([], service_definition_klass)
+            Rake::Task['validate'].execute
           end
 
           let(:service_definition_klass) { service_definition_klass_double(service_definition_instance_double) }
