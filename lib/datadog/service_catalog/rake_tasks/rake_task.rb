@@ -14,7 +14,7 @@ module Datadog
         def initialize(task_dependencies = [], service_definition_klass: V2::ServiceDefinition)
           super()
           @service_definition_klass = service_definition_klass
-          @task_dependencies = task_dependencies
+          @task_dependencies = Array(task_dependencies)
           @verbose = true
 
           yield self if block_given?
