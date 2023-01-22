@@ -11,7 +11,7 @@ module Datadog
       class RakeTask < ::Rake::TaskLib
         attr_accessor :task_dependencies, :verbose
 
-        def initialize(task_dependencies = [], service_definition_klass = V2::ServiceDefinition)
+        def initialize(task_dependencies = [], service_definition_klass: V2::ServiceDefinition)
           super()
           @service_definition_klass = service_definition_klass
           @task_dependencies = task_dependencies

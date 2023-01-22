@@ -26,7 +26,7 @@ module Datadog
 
         describe 'running upload_all' do
           before do
-            described_class.new([], service_definition_klass)
+            described_class.new(service_definition_klass: service_definition_klass)
             Rake::Task['validate'].execute
           end
 
