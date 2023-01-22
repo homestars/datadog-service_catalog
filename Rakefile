@@ -9,7 +9,7 @@ RuboCop::RakeTask.new
 
 RUBY_VERSIONS = '2.7, 3.0, 3.1'
 
-desc 'Run guard and spec for each supported ruby'
+desc 'Run rubocop and spec for each supported ruby'
 task :spec_all do
   RUBY_VERSIONS.split(',').map(&:strip).each do |ruby_version|
     puts "----- #{ruby_version} -----"
