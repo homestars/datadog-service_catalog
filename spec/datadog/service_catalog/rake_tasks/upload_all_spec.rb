@@ -22,14 +22,14 @@ module Datadog
 
         describe 'defining tasks' do
           it 'creates an upload_all task' do
-            expect(Rake::Task.task_defined?('service_catalog:upload_all')).to be true
+            expect(Rake::Task.task_defined?('upload_all')).to be true
           end
         end
 
         describe 'running upload_all' do
           before do
-            described_class.new(:service_catalog, [], service_definition_klass)
-            Rake::Task['service_catalog:upload_all'].execute
+            described_class.new(service_definition_klass: service_definition_klass)
+            Rake::Task['upload_all'].execute
           end
 
           let(:service_definition_klass) { service_definition_klass_double(service_definition_instance_double) }
