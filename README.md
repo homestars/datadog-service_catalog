@@ -9,7 +9,7 @@ Use Markdown front matter to update [DataDog's ServiceCatalog](https://docs.data
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'datadog-service_catalog'
+gem 'datadog-service_catalog', homestars: 'datadog-service_catalog'
 ```
 
 ### Usage
